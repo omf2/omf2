@@ -31,6 +31,17 @@ function _omf2_usage
     echo "  -v, --version  Print version"
 end
 
+#region: omf2 <command>
+
+function _omf2cmd__contrib --description "Manage OMF2 contribs"
+    if functions --query _omf2cmd__contrib__$argv[1]
+        _omf2cmd__contrib__$argv[1] $argv[2..]
+    else
+        echo >&2 "omf2 contrib: unknown command '$argv[1]'"
+        return 1
+    end
+end
+
 function _omf2cmd__prompt --description "View and pick OMF2 prompts"
     # Temp HACK!
     if test "$argv[1]" = choose
@@ -41,6 +52,61 @@ function _omf2cmd__prompt --description "View and pick OMF2 prompts"
         echo "omf2 prompt: TODO - implement this!"
     end
 end
+
+function _omf2cmd__plugin --description "View and pick OMF2 plugins"
+    echo "omf2 plugin: TODO!!"
+end
+
+function _omf2cmd__theme --description "View and pick OMF2 themes"
+    echo "omf2 theme: TODO!!"
+end
+
+#endregion
+
+#region omf2 contrib <command>
+
+function _omf2cmd__contrib__install --description "Install external contribs"
+    echo "omf2 contrib: TODO!!"
+end
+
+function _omf2cmd__contrib__remove --description "Remove contrib"
+    echo "omf2 contrib: TODO!!"
+end
+
+function _omf2cmd__contrib__list --description "List contribs"
+    set --local dotgit
+    set --local contrib
+    for dotgit in $omf2_path/plugins/*/*/.git
+        set contrib (path resolve $dotgit/..)
+        echo (path dirname $contrib | path basename)/(path basename $contrib)
+    end
+end
+
+function _omf2cmd__contrib__update --description "Update contribs"
+    set --local contrib_dir
+    set --local oldsha
+    set --local newsha
+    for contrib in (_omf2cmd__contrib__list)
+        set contrib_dir $omf2_path/plugins/$contrib
+        set oldsha (command git -C $contrib_dir rev-parse --short HEAD)
+        command git -C $contrib_dir pull --quiet --ff --depth 1 --rebase --autostash
+        set newsha (command git -C $contrib_dir rev-parse --short HEAD)
+        if test $oldsha != $newsha
+            echo "Plugin updated: $contrib ($oldsha->$newsha)"
+        end
+    end
+    echo "Contrib updates complete."
+end
+
+#endregion
+
+#region omf2 plugin <command>
+
+## TODO: ???
+
+#endregion
+
+#region omf2 prompt <command>
 
 function _omf2cmd__prompt__choose --description "Pick a OMF2 prompt"
     # if not type -q starship
@@ -76,16 +142,16 @@ function _omf2cmd__prompt__list --description "List OMF2 prompts"
     echo "omf2 prompt list: TODO!! Implement me"
 end
 
-function _omf2cmd__theme --description "View and pick OMF2 themes"
-    echo "omf2 theme: TODO!!"
-end
+#endregion
 
-function _omf2cmd__plugin --description "View and pick OMF2 plugins"
-    echo "omf2 plugin: TODO!!"
-end
+#region omf2 theme <command>
+
+## TODO: ???
+
+#endregion
 
 function omf2 --description "The Oh-My-Fish-2 config manager"
-    set --query omf2_path || set --local omf2_path $__fish_config_dir/.omf2
+    set --query omf2_path || set -Ux omf2_path $__fish_config_dir/.omf2
     set --local omf2_version 0.0.1
 
     argparse --name omf2 --ignore-unknown h/help v/version get-commands -- $argv
