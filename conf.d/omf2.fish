@@ -1,4 +1,4 @@
-set --query omf2_path || set -Ux omf2_path $__fish_config_dir/.omf2
+set --query omf2_path || set -gx omf2_path $__fish_config_dir/.omf2
 
 # Support for using Fisher to install the 'omf2' utility.
 function _omf2_install --on-event omf2_install
