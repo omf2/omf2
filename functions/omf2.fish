@@ -1,20 +1,20 @@
 # omf2 - Oh-My-Fish-2 manager
 
 function omf2 -a cmd -d "Oh-My-Fish-2 manager"
-    set -l omf2_version 0.0.2
+    set -l omf2_version 2.0.0-alpha
     set -q omf2_path || set -U omf2_path $__fish_config_dir/.omf2
 
     switch $cmd
         case "" -h --help
-            echo "omf2 - A repo manager for Fish plugins"
+            echo "omf2 - Oh-My-Fish-2 manager"
             echo
             echo "Usage:"
             echo "    omf2 <command> [<flags...>] <arguments...>"
             echo "    omf2 [-h | --help] [-v | --version]"
             echo
             echo "Commands:"
-            echo "  enable         Use an OMF2 contrib plugin"
-            echo "  disable        Stop using an OMF2 contrib plugin"
+            echo "  enable         Use an OMF2 contrib"
+            echo "  disable        Stop using an OMF2 contrib"
             echo "  fisher-event   Run handler for Fisher event"
             echo
             echo "Flags:"
@@ -66,8 +66,7 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             path basename $omf2_path/contribs/*/*/plugins/* | sort | uniq
         case enable disable
             if not type -q fisher
-                echo >&2 "omf2: Expecting Fisher to be installed."
-                echo >&2 "For Fisher installation, see: https://github.com/jorgebucaran/fisher"
+                echo >&2 "omf2: Fisher not installed. See: https://github.com/jorgebucaran/fisher"
                 return 1
             end
 
