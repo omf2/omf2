@@ -1,36 +1,31 @@
 function omf2 -a cmd -d "Oh-My-Fish-2 manager"
-    set -l omf2_version 2.0.0-alpha-002
+    set -l omf2_version 2.0.0-alpha-003
     set -q omf2_path || set -U omf2_path $__fish_config_dir/.omf2
 
     switch $cmd
         case "" -h --help
             echo "omf2 - The Oh-My-Fish-2 management utility"
             echo "Usage:"
-            echo "  omf2 list                  List OMF2 contribs"
-            echo "  omf2 enable <contrib>      Use an OMF2 contrib"
-            echo "  omf2 disable <contrib>     Stop using an OMF2 contrib"
-            echo "  omf2 fisher-event <event>  Handler Fisher events"
-            echo "  omf2 [-h | --help]         Show this help"
-            echo "  omf2 [-v | --version]      Show version"
+            echo "  omf2 [-h | --help] [-v | --version]"
+            echo "  omf2 (install | uninstall | update) <contrib>"
+            echo "  omf2 (enable | disable) <plugin>"
+            echo "  omf2 list"
         case -v --version
             echo "omf2, version $omf2_version"
-        case fisher-event
-            set -l eventname $argv[2]
-            set -l repo $argv[3]
+        case install uninstall update
+            set -l repo $argv[2]
             set -l repo_parts (string split '/' $repo)
-            if test (count $repo_parts) -eq 2
-                set --prepend repo github.com
-            end
-            set -l repodir $omf2_path/contribs/(string join "/" $repo_parts[2..])
+            test (count $repo_parts) -eq 2 && set --prepend repo_parts github.com
+            set -l repodir $omf2_path/(string join "/" $repo_parts[2..])
 
             if not string match --quiet "$HOME/*" $repodir
                 echo "omf2: 'omf2_path' not set correctly." >&2 && return 1
             end
 
-            switch $eventname
+            switch $cmd
                 case install
                     test -d $repodir && command rm -rf -- $repodir
-                    set -l giturl "https://"(string join "/" $repo)
+                    set -l giturl "https://"(string join "/" $repo_parts)
                     command git clone --quiet --depth 1 --recursive --shallow-submodules -- $giturl $repodir
                     if test $status -ne 0
                         echo "omf2: git clone failed for repo '$repo'." >&2 && return 1
