@@ -1,14 +1,9 @@
-complete -c omf2 -s h -l help -d 'Print Oh-My-Fish-2 help'
-complete -c omf2 -s v -l version -d 'Print Oh-My-Fish-2 version'
-
-function __set_omf_command_completions
-    set --local commands (omf2 --get-commands)
-    set --local cmd
-    set --local func_details
-
-    for cmd in $commands
-        set func_details (functions -vD _omf2cmd__$cmd)
-        complete -c omf2 -x -n __fish_use_subcommand -a $cmd -d $func_details[-1]
-    end
-end
-__set_omf_command_completions
+complete --command omf2 --short-option h --long-option help --description "Print Oh-My-Fish-2 help"
+complete --command omf2 --short-option v --long-option version --description "Print Oh-My-Fish-2 version"
+complete --command omf2 --no-files --exclusive --condition __fish_use_subcommand --arguments enable --description "Use an OMF2 contrib plugin"
+complete --command omf2 --no-files --exclusive --condition __fish_use_subcommand --arguments disable --description "Stop using an OMF2 contrib plugin"
+complete --command omf2 --no-files --exclusive --condition "__fish_seen_subcommand_from enable disable" --arguments "(omf2 list)"
+complete --command omf2 --no-files --exclusive --condition __fish_use_subcommand --arguments fisher-event --description "Run handler for Fisher event"
+complete --command omf2 --no-files --exclusive --condition "__fish_seen_subcommand_from fisher-event" --arguments "install" --description "Fisher install event"
+complete --command omf2 --no-files --exclusive --condition "__fish_seen_subcommand_from fisher-event" --arguments "update" --description "Fisher update event"
+complete --command omf2 --no-files --exclusive --condition "__fish_seen_subcommand_from fisher-event" --arguments "uninstall" --description "Fisher uninstall (remove) event"
