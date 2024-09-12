@@ -1,7 +1,7 @@
 # omf2 - Oh-My-Fish-2 manager
 
 function omf2 -a cmd -d "Oh-My-Fish-2 manager"
-    set -l omf2_version 1.0.0
+    set -l omf2_version 0.0.2
     set -q omf2_path || set -U omf2_path $__fish_config_dir/.omf2
 
     switch $cmd
