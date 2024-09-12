@@ -13,9 +13,9 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             echo "    omf2 [-h | --help] [-v | --version]"
             echo
             echo "Commands:"
-            echo "  enable         Use an OMF contrib plugin"
-            echo "  disable        Use an OMF contrib plugin"
-            echo "  fisher-event   Handle Fisher's events"
+            echo "  enable         Use an OMF2 contrib plugin"
+            echo "  disable        Stop using an OMF2 contrib plugin"
+            echo "  fisher-event   Run handler for Fisher event"
             echo
             echo "Flags:"
             echo "  -h, --help     Show this help message"
