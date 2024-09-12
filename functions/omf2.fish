@@ -42,14 +42,14 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
                     test -d $repodir && command rm -rf -- $repodir
             end
         case list
-            path basename $omf2_path/contribs/*/*/contribs/* | sort | uniq
+            path basename $omf2_path/*/*/contribs/* | sort | uniq
         case enable disable
             if not type -q fisher
                 echo "omf2: Fisher not installed. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
             end
 
             # TODO - handle plugin name overlaps.
-            set -l plugin_path $omf2_path/contribs/*/*/contribs/$argv[2]
+            set -l plugin_path $omf2_path/*/*/contribs/$argv[2]
             if test $cmd = enable
                 fisher install $plugin_path
             else if test $cmd = disable
