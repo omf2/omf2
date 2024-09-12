@@ -1,14 +1,15 @@
 function omf2 -a cmd -d "Oh-My-Fish-2 manager"
-    set -l omf2_version 2.0.0-alpha
+    set -l omf2_version 2.0.0-alpha-002
     set -q omf2_path || set -U omf2_path $__fish_config_dir/.omf2
 
     switch $cmd
         case "" -h --help
             echo "omf2 - The Oh-My-Fish-2 management utility"
             echo "Usage:"
+            echo "  omf2 list                  List OMF2 contribs"
             echo "  omf2 enable <contrib>      Use an OMF2 contrib"
             echo "  omf2 disable <contrib>     Stop using an OMF2 contrib"
-            echo "  omf2 fisher-event <event>  Run handler for Fisher event"
+            echo "  omf2 fisher-event <event>  Handler Fisher events"
             echo "  omf2 [-h | --help]         Show this help"
             echo "  omf2 [-v | --version]      Show version"
         case -v --version
@@ -17,10 +18,10 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             set -l eventname $argv[2]
             set -l repo $argv[3]
             set -l repo_parts (string split '/' $repo)
-            if test (count $repo) -eq 2
+            if test (count $repo_parts) -eq 2
                 set --prepend repo github.com
             end
-            set -l repodir $omf2_path/contribs/(string join "/" $argv[2..])
+            set -l repodir $omf2_path/contribs/(string join "/" $repo_parts[2..])
 
             if not string match --quiet "$HOME/*" $repodir
                 echo "omf2: 'omf2_path' not set correctly." >&2 && return 1
