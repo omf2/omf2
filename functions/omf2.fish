@@ -12,8 +12,9 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             echo "  omf2 list"
         case -v --version
             echo "omf2, version $omf2_version"
-        case install uninstall update
-            set -l repo $argv[2]
+        case fisher-event
+            set -l eventname $argv[2]
+            set -l repo $argv[3]
             set -l repo_parts (string split '/' $repo)
             test (count $repo_parts) -eq 2 && set --prepend repo_parts github.com
             set -l repodir $omf2_path/plugins/(string join "/" $repo_parts[2..])
@@ -22,7 +23,7 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
                 echo "omf2: 'omf2_path' not set correctly." >&2 && return 1
             end
 
-            switch $cmd
+            switch $eventname
                 case install
                     test -d $repodir && command rm -rf -- $repodir
                     set -l giturl "https://"(string join "/" $repo_parts)
