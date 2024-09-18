@@ -16,13 +16,13 @@ Once you have Fisher installed, you can install `omf2` and the core plugin pack 
 fisher install omf2/plugins-core
 ```
 
-OMF2 plugin packs, like plugins-core, will install the OMF2 utility for you. Alternatively, if you only want the OMF2 utility as a standalone, you can run:
+The "plugins-core" you just installed is called an OMF2 "plugin pack". Plugin packs will install the OMF2 utility for you. Alternatively, if you just want OMF2 as a standalone utility, you can simply run:
 
 ```console
 fisher install omf2/omf2
 ```
 
-OMF2 can work with your own custom plugin packs. To install a different plugin pack, again use Fisher:
+OMF2 can also work with your own custom plugin packs. To install a different plugin pack, again use Fisher:
 
 ```console
 fisher install your-name/your-omf2-plugin-pack
@@ -59,18 +59,22 @@ Similarly, to disable a plugin, use the 'disable' command.
 omf2 disable colorize-man-pages
 ```
 
-OMF2 uses [Fisher][fisher] to manage its plugin packs, updating your plugin packs is all done the same way you update your other plugins:
+OMF2 uses [Fisher][fisher] to manage its plugin packs. That means updating your OMF2 plugin packs is as simple as running:
 
 ```console
 fisher update
 ```
 
-Similarly, to uninstall OMF2, all you need to do is disable all your plugin packs and use Fisher's uninstall:
+Similarly, to uninstall OMF2, all you need to do is disable all your plugin packs, and then use Fisher's uninstall:
 
 ```console
 omf2 disable --all
 fisher remove omf2/omf2
 ```
+
+## Oh-My-Fish / Oh-My-Zsh users
+
+Are you a user of Oh-My-Zsh or Oh-My-Fish? Plugin packs with OMF2 alternatives are in development! Stay tuned.
 
 ## Attributions
 
