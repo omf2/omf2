@@ -1,13 +1,12 @@
-function omf2 -a cmd -d "Oh-My-Fish-2 manager"
-    set -l omf2_version 2.0.0-alpha-004
+function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
+    set -l omf2_version 1.0.0
     set -q omf2_path || set -U omf2_path $__fish_config_dir/.omf2
 
     switch $cmd
         case "" -h --help
-            echo "omf2 - The Oh-My-Fish-2 management utility"
+            echo "omf2 - Manage plugin packs for the Fish shell"
             echo "Usage:"
             echo "  omf2 [-h | --help] [-v | --version]"
-            echo "  omf2 (install | uninstall | update) <pack>"
             echo "  omf2 (enable | disable) <plugin>"
             echo "  omf2 list"
         case -v --version
@@ -46,15 +45,23 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             path basename $omf2_path/plugins/*/*/plugins/* | sort | uniq
         case enable disable
             if not type -q fisher
-                echo "omf2: Fisher not installed. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
+                echo "omf2: Fisher not found. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
             end
 
             # TODO - handle plugin name overlaps.
-            set -l plugin_path $omf2_path/plugins/*/*/plugins/$argv[2]
-            if test $cmd = enable
-                fisher install $plugin_path
-            else if test $cmd = disable
-                fisher remove $plugin_path
+            set --local plugins
+            if $argv[2] = "--all"
+                set plugins (omf2 list)
+            else
+                set plugins $argv[2..]
+            end
+            for plugin in $plugins
+                set --local plugin_path $omf2_path/plugins/*/*/plugins/$argv[2]
+                if test $cmd = enable
+                    fisher install $plugin_path
+                else if test $cmd = disable
+                    fisher remove $plugin_path
+                end
             end
         case '*'
             echo "omf2: unknown command '"$cmd"'" >&2 && return 1
