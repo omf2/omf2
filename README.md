@@ -76,6 +76,10 @@ fisher remove omf2/omf2
 
 Are you a user of Oh-My-Zsh or Oh-My-Fish? Plugin packs with OMF2 alternatives are in development! Stay tuned.
 
+## Want to develop your own plugin pack?
+
+Stay tuned! More details to come soon.
+
 ## Attributions
 
 - [Logo][logo] by <a href="https://www.svgrepo.com" target="_blank">SVG Repo</a>
