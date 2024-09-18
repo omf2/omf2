@@ -10,16 +10,22 @@
 
 First, install [Fisher][fisher]. OMF2 uses Fisher to manage your plugin packs, so if you are already a Fisher user you'll feel right at home.
 
-Once you have Fisher installed, you can install the `omf2` and the core plugin pack with Fisher:
+Once you have Fisher installed, you can install `omf2` and the core plugin pack with Fisher:
 
 ```console
 fisher install omf2/plugins-core
 ```
 
-Alternatively, if you have developed your own plugins pack, you can install the OMF2 utility as a standalone to manage it:
+OMF2 plugin packs, like plugins-core, will install the OMF2 utility for you. Alternatively, if you only want the OMF2 utility as a standalone, you can run:
 
 ```console
 fisher install omf2/omf2
+```
+
+OMF2 can work with your own custom plugin packs. To install a different plugin pack, again use Fisher:
+
+```console
+fisher install your-name/your-omf2-plugin-pack
 ```
 
 ## Usage
@@ -59,7 +65,7 @@ OMF2 uses [Fisher][fisher] to manage its plugin packs, updating your plugin pack
 fisher update
 ```
 
-Similarly, to uninstall OMF2, disable all your plugin packs and uninstall:
+Similarly, to uninstall OMF2, all you need to do is disable all your plugin packs and use Fisher's uninstall:
 
 ```console
 omf2 disable --all
