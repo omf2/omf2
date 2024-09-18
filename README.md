@@ -13,10 +13,10 @@ First, install [Fisher][fisher]. OMF2 uses Fisher to manage your plugin packs, s
 Once you have Fisher installed, you can install `omf2` and the core plugin pack with Fisher:
 
 ```console
-fisher install omf2/plugins-core
+fisher install omf2/core-plugins-pack
 ```
 
-The "plugins-core" you just installed is called an OMF2 "plugin pack". Plugin packs will install the OMF2 utility for you. Alternatively, if you just want OMF2 as a standalone utility, you can simply run:
+The [omf2/core-plugins-pack][core-plugins-pack] you just installed is called an OMF2 "plugin pack". Plugin packs will install the OMF2 utility for you. Alternatively, if you just want OMF2 as a standalone utility, you can simply run:
 
 ```console
 fisher install omf2/omf2
@@ -85,5 +85,6 @@ Stay tuned! More details to come soon.
 - [Logo][logo] by <a href="https://www.svgrepo.com" target="_blank">SVG Repo</a>
 
 
+[core-plugins-pack]: https://github.com/omf2/core-plugins-pack
 [fisher]: https://github.com/jorgebucaran/fisher
 [logo]: https://www.svgrepo.com/svg/156874/fish
