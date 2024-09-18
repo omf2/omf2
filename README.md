@@ -6,23 +6,29 @@
 
 **This project is in early stages... more to come soon!**
 
+## Description
+
+OMF2 hosts collections of Fish shell scripts called "plugin packs". Plugin Packs allow you build and share groups a Fish plugins easier. OMF aims to make it easy to find, use, share, borrow, and adapt Fish scripts to make them your own. It also aims to make transitioning to Fish easier for users of other shell frameworks, like [Oh-My-Zsh][omz].
+
+This repo host the `omf2` utility. It is a small, dirty simple Fish plugin pack manager that leverages the popular [Fisher][fisher] plugin manager to support its plugin packs.
+
 ## Install
 
-First, install [Fisher][fisher]. OMF2 uses Fisher to manage your plugin packs, so if you are already a Fisher user you'll feel right at home.
+First, follow the installation instructions to install [Fisher][fisher]. OMF2 requires Fisher, so if you are already a Fisher user you'll feel right at home. If you haven't used Fisher, its job is to manage standalone Fish plugins. OMF2 leverages Fisher's capabilities to add support for "Plugin Packs", which are collections of nested plugins within a single repo.
 
-Once you have Fisher installed, you can install `omf2` and the core plugin pack with Fisher:
+Once you have Fisher installed, you can install the `omf2` utility and the core plugin pack with Fisher:
 
 ```console
 fisher install omf2/core-plugins-pack
 ```
 
-The [omf2/core-plugins-pack][core-plugins-pack] you just installed is called an OMF2 "plugin pack". Plugin packs will install the OMF2 utility for you. Alternatively, if you just want OMF2 as a standalone utility, you can simply run:
+Installing a plugin pack like [omf2/core-plugins-pack][core-plugins-pack] will install the OMF2 utility for you. Alternatively, if you just want OMF2 as a standalone utility, you can simply run:
 
 ```console
 fisher install omf2/omf2
 ```
 
-OMF2 can also work with your own custom plugin packs. To install a different plugin pack, again use Fisher:
+OMF2 can also work with your own custom plugin packs. To install a different plugin pack, again simply use Fisher:
 
 ```console
 fisher install your-name/your-omf2-plugin-pack
@@ -85,6 +91,7 @@ Stay tuned! More details to come soon.
 - [Logo][logo] by <a href="https://www.svgrepo.com" target="_blank">SVG Repo</a>
 
 
+[omz]: https://github.com/ohmyzsh/ohmyzsh
 [core-plugins-pack]: https://github.com/omf2/core-plugins-pack
 [fisher]: https://github.com/jorgebucaran/fisher
 [logo]: https://www.svgrepo.com/svg/156874/fish
