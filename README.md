@@ -12,13 +12,13 @@ First, install [Fisher][fisher]. OMF2 uses Fisher to manage your plugin packs, s
 
 Once you have Fisher installed, you can install the `omf2` and the core plugin pack with Fisher:
 
-```fish
+```console
 fisher install omf2/plugins-core
 ```
 
 Alternatively, if you have developed your own plugins pack, you can install the OMF2 utility as a standalone to manage it:
 
-```fish
+```console
 fisher install omf2/omf2
 ```
 
@@ -26,7 +26,7 @@ fisher install omf2/omf2
 
 See which plugins are available with the 'list' command:
 
-```fish
+```console
 > omf2 list
 bang-commands
 brew
@@ -43,25 +43,25 @@ zoxide
 
 To enable a plugin, use the 'enable' command.
 
-```fish
+```console
 omf2 enable zoxide
 ```
 
 Similarly, to disable a plugin, use the 'disable' command.
 
-```fish
+```console
 omf2 disable colorize-man-pages
 ```
 
 OMF2 uses [Fisher][fisher] to manage its plugin packs, updating your plugin packs is all done the same way you update your other plugins:
 
-```fish
+```console
 fisher update
 ```
 
 Similarly, to uninstall OMF2, disable all your plugin packs and uninstall:
 
-```fish
+```console
 omf2 disable --all
 fisher remove omf2/omf2
 ```
