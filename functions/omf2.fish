@@ -7,7 +7,7 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             echo "omf2 - The Oh-My-Fish-2 management utility"
             echo "Usage:"
             echo "  omf2 [-h | --help] [-v | --version]"
-            echo "  omf2 (install | uninstall | update) <contrib>"
+            echo "  omf2 (install | uninstall | update) <pack>"
             echo "  omf2 (enable | disable) <plugin>"
             echo "  omf2 list"
         case -v --version
@@ -42,14 +42,14 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
                     test -d $repodir && command rm -rf -- $repodir
             end
         case list
-            path basename $omf2_path/*/*/contribs/* | sort | uniq
+            path basename $omf2_path/*/*/plugins/* | sort | uniq
         case enable disable
             if not type -q fisher
                 echo "omf2: Fisher not installed. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
             end
 
             # TODO - handle plugin name overlaps.
-            set -l plugin_path $omf2_path/*/*/contribs/$argv[2]
+            set -l plugin_path $omf2_path/*/*/plugins/$argv[2]
             if test $cmd = enable
                 fisher install $plugin_path
             else if test $cmd = disable

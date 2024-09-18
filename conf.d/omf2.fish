@@ -11,6 +11,6 @@ function _omf2_update --on-event omf2_update
 end
 
 function _omf2_uninstall --on-event omf2_uninstall
-    # TODO - maybe we want to be careful here... fisher uninstall contribs, etc.
+    # TODO - maybe we want to be careful here... fisher uninstall plugin packs, etc.
     # rm -rf -- $omf2_path/oh-my-fish-2/omf2
 end
