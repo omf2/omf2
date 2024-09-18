@@ -65,6 +65,19 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
                     fisher remove $plugin_path
                 end
             end
+        case install remove update uninstall
+            echo >&2 "omf2: unknown command '"$cmd"'."
+            set --local green (set_color green)
+            set --local reset (set_color normal)
+            switch $cmd
+                case install
+                    echo >&2 "Did you mean "$green"'fisher install'"$reset", or perhaps "$green"'omf2 enable'"$reset"?"
+                case remove uninstall
+                    echo >&2 "Did you mean "$green"'fisher remove'"$reset", or perhaps "$green"'omf2 disable'"$reset"?"
+                case update
+                    echo >&2 "Did you mean "$green"'fisher update'"$reset"?"
+            end
+            return 1
         case '*'
             echo "omf2: unknown command '"$cmd"'" >&2 && return 1
     end
