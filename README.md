@@ -10,13 +10,13 @@ It works, and bug reports/PRs are welcome.
 
 ## Description
 
-OMF2 hosts collections of Fish shell scripts called "plugin packs". Plugin Packs allow you build and share groups a Fish plugins easier. OMF2 aims to make it easy to find, use, share, borrow, and adapt Fish scripts and make them your own. It also aims to make transitioning to Fish easier for users of other shell frameworks, like [Oh-My-Zsh][omz].
+OMF2 hosts collections of Fish shell scripts called "plugin packs". Plugin Packs allow you build and share groups of Fish plugins easier. OMF2 aims to make it easy to find, use, share, borrow, and adapt Fish scripts and make them your own. It also aims to make transitioning to Fish easier for users of other shell frameworks, like [Oh-My-Zsh][omz].
 
-This repo hosts the `omf2` utility. It is a small, dirt simple Fish plugin pack manager that leverages the popular [Fisher][fisher] plugin manager to support its plugin packs.
+This repo hosts the `omf2` utility. It is a small, dirt-simple manager for plugin packs that leverages the popular [Fisher][fisher] plugin manager. Plugin packs are installed like any other regular Fisher plugin, and then the nested plugins within the pack are "enabled/disabled" via the `omf2` utility.
 
 ## Install
 
-First, follow the installation instructions to install [Fisher][fisher]. OMF2 requires Fisher, so if you are already a Fisher user you'll feel right at home. If you haven't used Fisher, its job is to manage standalone Fish plugins. OMF2 leverages Fisher's capabilities to add support for "Plugin Packs", which are collections of nested plugins within a single repo.
+First, follow the installation instructions to install [Fisher][fisher]. OMF2 requires Fisher, so if you are already a user you'll feel right at home. If you haven't used Fisher before, its job is to manage standalone Fish plugins.
 
 Once you have Fisher installed, you can install the `omf2` utility and the core plugin pack with Fisher:
 
@@ -24,7 +24,7 @@ Once you have Fisher installed, you can install the `omf2` utility and the core 
 fisher install omf2/core-plugins-pack
 ```
 
-Installing a plugin pack like [omf2/core-plugins-pack][core-plugins-pack] will install the OMF2 utility for you. Alternatively, if you just want OMF2 as a standalone utility, you can simply run:
+Installing a plugin pack like [omf2/core-plugins-pack][core-plugins-pack] will install the OMF2 utility for you. Alternatively, if you only want `omf2` as a standalone utility, you can simply run:
 
 ```console
 fisher install omf2/omf2
@@ -55,13 +55,13 @@ zoxide
 ...
 ```
 
-To enable a plugin, use the 'enable' command.
+To enable a plugin from a pack, use the 'enable' command.
 
 ```console
 omf2 enable zoxide
 ```
 
-Similarly, to disable a plugin, use the 'disable' command.
+Similarly, to disable a plugin from a pack, use the 'disable' command.
 
 ```console
 omf2 disable colorize-man-pages
