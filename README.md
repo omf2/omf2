@@ -4,13 +4,15 @@
 
 ## Note
 
-**This project is in early stages... more to come soon!**
+**This project is in early, experimental stages... more to come!**
+
+It works, and bug reports/PRs are welcome.
 
 ## Description
 
-OMF2 hosts collections of Fish shell scripts called "plugin packs". Plugin Packs allow you build and share groups a Fish plugins easier. OMF aims to make it easy to find, use, share, borrow, and adapt Fish scripts to make them your own. It also aims to make transitioning to Fish easier for users of other shell frameworks, like [Oh-My-Zsh][omz].
+OMF2 hosts collections of Fish shell scripts called "plugin packs". Plugin Packs allow you build and share groups a Fish plugins easier. OMF2 aims to make it easy to find, use, share, borrow, and adapt Fish scripts and make them your own. It also aims to make transitioning to Fish easier for users of other shell frameworks, like [Oh-My-Zsh][omz].
 
-This repo host the `omf2` utility. It is a small, dirty simple Fish plugin pack manager that leverages the popular [Fisher][fisher] plugin manager to support its plugin packs.
+This repo hosts the `omf2` utility. It is a small, dirt simple Fish plugin pack manager that leverages the popular [Fisher][fisher] plugin manager to support its plugin packs.
 
 ## Install
 
