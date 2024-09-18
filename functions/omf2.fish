@@ -16,7 +16,7 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
             set -l repo $argv[3]
             set -l repo_parts (string split '/' $repo)
             test (count $repo_parts) -eq 2 && set --prepend repo_parts github.com
-            set -l repodir $omf2_path/plugins/(string join "/" $repo_parts[2..])
+            set -l repodir $omf2_path/packs/(string join "__" $repo_parts[2..])
 
             if not string match --quiet "$HOME/*" $repodir
                 echo "omf2: 'omf2_path' not set correctly." >&2 && return 1
@@ -42,7 +42,7 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
                     test -d $repodir && command rm -rf -- $repodir
             end
         case list
-            path basename $omf2_path/plugins/*/*/plugins/* | sort | uniq
+            path basename $omf2_path/packs/*/plugins/* | sort | uniq
         case enable disable
             if not type -q fisher
                 echo "omf2: Fisher not found. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
@@ -54,7 +54,7 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
                 set plugins (omf2 list)
             end
             for plugin in $plugins
-                set --local plugin_path $omf2_path/plugins/*/*/plugins/$plugin
+                set --local plugin_path $omf2_path/packs/*/plugins/$plugin
                 if not test -d $plugin_path
                     echo "omf2: Plugin not found in plugin packs '$plugin'." >&2
                     continue
