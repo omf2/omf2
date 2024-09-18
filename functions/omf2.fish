@@ -1,5 +1,5 @@
 function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
-    set -l omf2_version 1.0.0
+    set -l omf2_version 1.0.0-beta-20240918
     set -q omf2_path || set -U omf2_path $__fish_config_dir/.omf2
 
     switch $cmd
@@ -49,14 +49,16 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
             end
 
             # TODO - handle plugin name overlaps.
-            set --local plugins
-            if $argv[2] = "--all"
+            set --local plugins $argv[2..]
+            if test "$argv[2]" = "-a" || test "$argv[2]" = "--all"
                 set plugins (omf2 list)
-            else
-                set plugins $argv[2..]
             end
             for plugin in $plugins
-                set --local plugin_path $omf2_path/plugins/*/*/plugins/$argv[2]
+                set --local plugin_path $omf2_path/plugins/*/*/plugins/$plugin
+                if not test -d $plugin_path
+                    echo "omf2: Plugin not found in plugin packs '$plugin'." >&2
+                    continue
+                end
                 if test $cmd = enable
                     fisher install $plugin_path
                 else if test $cmd = disable
