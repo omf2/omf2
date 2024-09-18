@@ -16,7 +16,7 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
             set -l repo $argv[2]
             set -l repo_parts (string split '/' $repo)
             test (count $repo_parts) -eq 2 && set --prepend repo_parts github.com
-            set -l repodir $omf2_path/(string join "/" $repo_parts[2..])
+            set -l repodir $omf2_path/plugins/(string join "/" $repo_parts[2..])
 
             if not string match --quiet "$HOME/*" $repodir
                 echo "omf2: 'omf2_path' not set correctly." >&2 && return 1
@@ -42,14 +42,14 @@ function omf2 -a cmd -d "Oh-My-Fish-2 manager"
                     test -d $repodir && command rm -rf -- $repodir
             end
         case list
-            path basename $omf2_path/*/*/plugins/* | sort | uniq
+            path basename $omf2_path/plugins/*/*/plugins/* | sort | uniq
         case enable disable
             if not type -q fisher
                 echo "omf2: Fisher not installed. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
             end
 
             # TODO - handle plugin name overlaps.
-            set -l plugin_path $omf2_path/*/*/plugins/$argv[2]
+            set -l plugin_path $omf2_path/plugins/*/*/plugins/$argv[2]
             if test $cmd = enable
                 fisher install $plugin_path
             else if test $cmd = disable
