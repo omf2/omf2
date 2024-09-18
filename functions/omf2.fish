@@ -19,7 +19,7 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
             set -l repodir $omf2_path/packs/(string join "__" $repo_parts[2..])
 
             if not string match --quiet "$HOME/*" $repodir
-                echo "omf2: 'omf2_path' not set correctly." >&2 && return 1
+                echo >&2 "omf2: 'omf2_path' not set correctly." && return 1
             end
 
             switch $eventname
@@ -28,15 +28,15 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
                     set -l giturl "https://"(string join "/" $repo_parts)
                     command git clone --quiet --depth 1 --recursive --shallow-submodules -- $giturl $repodir
                     if test $status -ne 0
-                        echo "omf2: git clone failed for repo '$repo'." >&2 && return 1
+                        echo >&2 "omf2: git clone failed for repo '$repo'." && return 1
                     end
                 case update
                     if not test -d $repodir
-                        echo "omf2: Repo not installed '$repo'." >&2 && return 1
+                        echo >&2 "omf2: Repo not installed '$repo'." && return 1
                     end
                     command git -C $repodir pull --quiet --ff --depth 1 --rebase --autostash
                     if test $status -ne 0
-                        echo "omf2: git pull failed for repo '$repo'." >&2 && return 1
+                        echo >&2 "omf2: git pull failed for repo '$repo'." && return 1
                     end
                 case uninstall
                     test -d $repodir && command rm -rf -- $repodir
@@ -45,7 +45,7 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
             path basename $omf2_path/packs/*/plugins/* | sort | uniq
         case enable disable
             if not type -q fisher
-                echo "omf2: Fisher not found. See: https://github.com/jorgebucaran/fisher" >&2 && return 1
+                echo >&2 "omf2: Fisher not found. See: https://github.com/jorgebucaran/fisher" && return 1
             end
 
             # TODO - handle plugin name overlaps.
@@ -56,7 +56,7 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
             for plugin in $plugins
                 set --local plugin_path $omf2_path/packs/*/plugins/$plugin
                 if not test -d $plugin_path
-                    echo "omf2: Plugin not found in plugin packs '$plugin'." >&2
+                    echo >&2 "omf2: Plugin not found in plugin packs '$plugin'."
                     continue
                 end
                 if test $cmd = enable
@@ -79,6 +79,6 @@ function omf2 -a cmd -d "Manage plugin packs for the Fish shell"
             end
             return 1
         case '*'
-            echo "omf2: unknown command '"$cmd"'" >&2 && return 1
+            echo >&2 "omf2: unknown command '"$cmd"'" && return 1
     end
 end
